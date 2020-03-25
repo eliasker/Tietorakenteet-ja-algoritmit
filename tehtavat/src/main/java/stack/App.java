@@ -10,11 +10,11 @@ public class App {
     Stack s = new Stack();
     String data;
     do {
-      System.out.println("Lisää alkio");
-      System.out.println("Poista alkio");
-      System.out.println("Pinon sisältö");
-      System.out.println("Alkioiden lukumäärä");
-      System.out.println("Lopeta");
+      System.out.println("1\tLisää alkio");
+      System.out.println("2\tPoista alkio");
+      System.out.println("3\tPinon sisältö");
+      System.out.println("4\tAlkioiden lukumäärä");
+      System.out.println("5\tLopeta");
       System.out.println("\n");
       select = Read.character();
       switch (select) {

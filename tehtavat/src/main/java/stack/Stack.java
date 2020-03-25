@@ -2,23 +2,32 @@ package stack;
 
 public class Stack {
   private ListItem top;
-  private int size; // TODO: Adding to size
+  private int size;
 
-  // TODO: implement
   public void push(String aData) {
-
+    ListItem newItem = new ListItem();
+    newItem.setData(aData);
+    newItem.setNext(top);
+    top = newItem;
+    size++;
   }
 
-  // TODO: implement
   public ListItem pop() {
-    // return top
-    // if empty return null
-    return null;
+    if (top == null)
+      return null;
+    ListItem newTop = top.getNext();
+    ListItem currItem = top;
+    top = newTop;
+    size--;
+    return currItem;
   }
 
-  // TODO: implement
   public void printItems() {
-
+    ListItem curr = top;
+    while (curr != null) {
+      System.out.println(curr.getData());
+      curr = curr.getNext();
+    }
   }
 
   public int getSize() {
