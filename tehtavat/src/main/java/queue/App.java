@@ -14,7 +14,7 @@ public class App {
     do {
       System.out.println("1\tLisää alkio");
       System.out.println("2\tPoista alkio");
-      System.out.println("3\tPinon sisältö");
+      System.out.println("3\tJonon sisältö");
       System.out.println("4\tAlkioiden lukumäärä");
       System.out.println("5\tLopeta");
       System.out.println("\n");
