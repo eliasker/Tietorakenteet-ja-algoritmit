@@ -1,4 +1,4 @@
-package stack;
+package queue;
 
 import util.Read;
 
@@ -9,7 +9,7 @@ public class App {
 
   private static void printMenu() {
     char select;
-    Stack s = new Stack();
+    Queue q = new Queue();
     String data;
     do {
       System.out.println("1\tLisää alkio");
@@ -23,20 +23,20 @@ public class App {
         case '1':
           System.out.println("Annan alkion sisältö (merkkijono)");
           data = new String(Read.line());
-          s.push(data);
+          q.enqueue(data);
           break;
         case '2':
-          ListItem item = s.pop();
+          QueueItem item = q.dequeue();
           if (item == null)
-            System.out.println("Pino on tyhjä");
+            System.out.println("Jono on tyhjä");
           else
             System.out.println("Poistettu alkio: " + item.getData());
           break;
         case '3':
-          s.printItems();
+          q.printItems();
           break;
         case '4':
-          System.out.println("Lukumäärä = " + s.getSize());
+          System.out.println("Lukumäärä = " + q.getSize());
           break;
         case '5':
           break;
