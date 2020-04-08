@@ -5,41 +5,43 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
   final static int SAMPLE_SIZE = 10000;
-  final static int USE_ALGORITHM = 1; // 0 is select sort, 1 is merge and 2 is quick
   final static String[] algorithmNames = { "Select sort", "Merge sort", "Quick Sort" };
-  public static int comparisons = 0;
+  static int counter = 0;
 
   public static void main(String[] args) {
-    int[] numbers = generateSample();
-    System.out.println("Initial array generated");
-    // printList(numbers);
-    long startTime = 0;
-    long elapsedTime = 0;
-    switch (USE_ALGORITHM) {
-      case 0:
-        startTime = System.nanoTime();
-        selectSort(numbers);
-        elapsedTime = System.nanoTime() - startTime;
-        break;
-      case 1:
-        startTime = System.nanoTime();
-        mergeSort(numbers, 0, numbers.length - 1);
-        elapsedTime = System.nanoTime() - startTime;
-        break;
-      case 2:
-        startTime = System.nanoTime();
-        quickSort(numbers, 0, numbers.length - 1);
-        elapsedTime = System.nanoTime() - startTime;
-        break;
-    }
-    System.out.println("\n");
-    // printList(numbers);
+    for (int USE_ALGORITHM = 0; USE_ALGORITHM < algorithmNames.length; USE_ALGORITHM++) {
+      counter = 0;
+      int[] numbers = generateSample();
+      System.out.println("\nInitial array generated");
+      //printList(numbers);
+      long startTime = 0;
+      long elapsedTime = 0;
+      switch (USE_ALGORITHM) {
+        case 0:
+          startTime = System.nanoTime();
+          selectSort(numbers);
+          elapsedTime = System.nanoTime() - startTime;
+          break;
+        case 1:
+          startTime = System.nanoTime();
+          mergeSort(numbers, 0, numbers.length - 1);
+          elapsedTime = System.nanoTime() - startTime;
+          break;
+        case 2:
+          startTime = System.nanoTime();
+          quickSort(numbers, 0, numbers.length - 1);
+          elapsedTime = System.nanoTime() - startTime;
+          break;
+      }
 
-    System.out.println("Sorting done.");
-    System.out.println("Sample size: " + SAMPLE_SIZE);
-    System.out.println("Used algorithm: " + algorithmNames[USE_ALGORITHM]);
-    System.out.println("It took: " + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + "ms");
-    System.out.println("Comparisons done: " + comparisons);
+      System.out.println("\nSorting done.");
+      System.out.println("Sample size: " + SAMPLE_SIZE);
+      System.out.println("Used algorithm: " + algorithmNames[USE_ALGORITHM]);
+      System.out.println("It took: " + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + "ms");
+      System.out.println("Counter: " + counter);
+      //printList(numbers);
+      System.out.println("\n");
+    }
   }
 
   public static int[] generateSample() {
@@ -64,13 +66,15 @@ public class Main {
 
     for (i = 0; i < SAMPLE_SIZE; i++) {
       smallest = i;
+      counter++;
       for (j = i + 1; j < SAMPLE_SIZE; j++) {
-        comparisons++;
+        counter++;
         if (numbers[j] < numbers[smallest]) {
           smallest = j;
         }
+        counter++;
       }
-      comparisons++;
+      counter++;
       if (smallest != i) {
         temp = numbers[smallest];
         numbers[smallest] = numbers[i];
@@ -80,8 +84,8 @@ public class Main {
   }
 
   public static void mergeSort(int[] numbers, int low, int high) {
+    counter++;
     if (high <= low) {
-      comparisons++;
       return;
     }
 
@@ -96,9 +100,11 @@ public class Main {
     int rightArray[] = new int[high - mid];
 
     for (int i = 0; i < leftArray.length; i++) {
+      counter++;
       leftArray[i] = numbers[low + i];
     }
     for (int i = 0; i < rightArray.length; i++) {
+      counter++;
       rightArray[i] = numbers[mid + i + 1];
     }
 
@@ -106,9 +112,9 @@ public class Main {
     int rightIndex = 0;
 
     for (int i = low; i < high + 1; i++) {
-      comparisons++;
+      counter++;
       if (leftIndex < leftArray.length && rightIndex < rightArray.length) {
-        comparisons++;
+        counter++;
         if (leftArray[leftIndex] < rightArray[rightIndex]) {
           numbers[i] = leftArray[leftIndex];
           leftIndex++;
@@ -117,11 +123,11 @@ public class Main {
           rightIndex++;
         }
       } else if (leftIndex < leftArray.length) {
-        comparisons++;
+        counter++;
         numbers[i] = leftArray[leftIndex];
         leftIndex++;
       } else if (rightIndex < rightArray.length) {
-        comparisons++;
+        counter++;
         numbers[i] = rightArray[rightIndex];
         rightIndex++;
       }
@@ -129,6 +135,7 @@ public class Main {
   }
 
   public static void quickSort(int[] numbers, int start, int end) {
+    counter++;
     if (start < end) {
       int partitionIndex = partition(numbers, start, end);
       quickSort(numbers, start, partitionIndex - 1);
@@ -139,6 +146,7 @@ public class Main {
   public static int partition(int[] numbers, int start, int end) {
     int pivot = numbers[end];
     for (int i = start; i < end; i++) {
+      counter++;
       if (numbers[i] < pivot) {
         int temp = numbers[start];
         numbers[start] = numbers[i];
