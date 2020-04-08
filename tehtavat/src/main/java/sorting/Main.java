@@ -1,32 +1,39 @@
 package sorting;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
-  final static int SAMPLE_SIZE = 1000;
-  final static int USE_ALGORITHM = 3; // 1, 2, 3
+  final static int SAMPLE_SIZE = 50000;
+  final static int USE_ALGORITHM = 0; // 0 is select sort, 1 is merge and 2 is quick
+  final static String[] algorithmNames = { "Select sort", "Merge sort", "Quick Sort" };
 
   public static void main(String[] args) {
     int[] numbers = generateSample();
-    System.out.println("Initial array");
+    System.out.println("Initial array generated");
 
+    long startTime = 0;
+    long elapsedTime = 0;
     switch (USE_ALGORITHM) {
-      case 1:
-        System.out.println("Select sort");
+      case 0:
+        startTime = System.nanoTime();
         selectSort(numbers);
+        elapsedTime = System.nanoTime() - startTime;
+        break;
+      case 1:
+        startTime = System.nanoTime();
+        mergeSort(numbers, 0, numbers.length - 1);
+        elapsedTime = System.nanoTime() - startTime;
         break;
       case 2:
-        System.out.println("Merge sort");
-        mergeSort(numbers, 0, numbers.length - 1);
-        break;
-      case 3:
-        System.out.println("Quick sort");
+        startTime = System.nanoTime();
         quickSort(numbers, 0, numbers.length - 1);
-
+        elapsedTime = System.nanoTime() - startTime;
         break;
     }
-
-    System.out.println("Done");
+    System.out.println("Sorting done.");
+    System.out.println("Used algorithm: " + algorithmNames[USE_ALGORITHM]);
+    System.out.println("It took: " + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + "ms");
   }
 
   public static int[] generateSample() {
