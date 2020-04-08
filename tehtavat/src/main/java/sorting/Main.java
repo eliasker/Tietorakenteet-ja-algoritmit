@@ -4,18 +4,28 @@ import java.util.Random;
 
 public class Main {
   final static int SAMPLE_SIZE = 1000;
+  final static int USE_ALGORITHM = 3; // 1, 2, 3
 
   public static void main(String[] args) {
     int[] numbers = generateSample();
     System.out.println("Initial array");
-    //printList(numbers);
-    //System.out.println("\n\n");
 
-    //System.out.println("Select sort");
-    //selectSort(numbers);
+    switch (USE_ALGORITHM) {
+      case 1:
+        System.out.println("Select sort");
+        selectSort(numbers);
+        break;
+      case 2:
+        System.out.println("Merge sort");
+        mergeSort(numbers, 0, numbers.length - 1);
+        break;
+      case 3:
+        System.out.println("Quick sort");
+        quickSort(numbers, 0, numbers.length - 1);
 
-    System.out.println("Merge sort");
-    mergeSort(numbers, 0, numbers.length - 1);
+        break;
+    }
+
     System.out.println("Done");
   }
 
@@ -93,5 +103,30 @@ public class Main {
         rightIndex++;
       }
     }
+  }
+
+  public static void quickSort(int[] numbers, int start, int end) {
+    if (start < end) {
+      int partitionIndex = partition(numbers, start, end);
+      quickSort(numbers, start, partitionIndex - 1);
+      quickSort(numbers, partitionIndex + 1, end);
+    }
+  }
+
+  public static int partition(int[] numbers, int start, int end) {
+    int pivot = numbers[end];
+    for (int i = start; i < end; i++) {
+      if (numbers[i] < pivot) {
+        int temp = numbers[start];
+        numbers[start] = numbers[i];
+        numbers[i] = temp;
+        start++;
+      }
+    }
+    int temp = numbers[start];
+    numbers[start] = pivot;
+    numbers[end] = temp;
+
+    return start;
   }
 }
