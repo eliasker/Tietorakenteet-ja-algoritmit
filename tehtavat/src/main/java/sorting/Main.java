@@ -1,5 +1,7 @@
 package sorting;
 
+import util.Logger;
+
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -9,11 +11,11 @@ public class Main {
   static int counter = 0;
 
   public static void main(String[] args) {
+    Logger.getInstance().write("\n******************************");
     for (int USE_ALGORITHM = 0; USE_ALGORITHM < algorithmNames.length; USE_ALGORITHM++) {
       counter = 0;
       int[] numbers = generateSample();
       System.out.println("\nInitial array generated");
-      //printList(numbers);
       long startTime = 0;
       long elapsedTime = 0;
       switch (USE_ALGORITHM) {
@@ -33,14 +35,14 @@ public class Main {
           elapsedTime = System.nanoTime() - startTime;
           break;
       }
+      System.out.println("Sorting done with: " + algorithmNames[USE_ALGORITHM]);
 
-      System.out.println("\nSorting done.");
-      System.out.println("Sample size: " + SAMPLE_SIZE);
-      System.out.println("Used algorithm: " + algorithmNames[USE_ALGORITHM]);
-      System.out.println("It took: " + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + "ms");
-      System.out.println("Counter: " + counter);
-      //printList(numbers);
-      System.out.println("\n");
+      
+      Logger.getInstance().write("Sample size: " + SAMPLE_SIZE);
+      Logger.getInstance().write("Used algorithm: " + algorithmNames[USE_ALGORITHM]);
+      Logger.getInstance().write("It took: " + TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS) + "ms");
+      Logger.getInstance().write("Counter: " + counter);
+      Logger.getInstance().write("------------------------------");
     }
   }
 
