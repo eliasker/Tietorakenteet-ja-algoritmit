@@ -1,7 +1,6 @@
 package binaryTree;
 
 public class Node {
-
   private String data;
   private BinaryTree left;
   private BinaryTree right;
@@ -30,6 +29,4 @@ public class Node {
   public void setRight(BinaryTree tree) {
       right = tree;
   }
-
-
 }

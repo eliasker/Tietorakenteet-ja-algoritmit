@@ -10,17 +10,33 @@ public class BinaryTree {
   public BinaryTree() {
     root = null;
   }
-  /*
-   * public BinaryTree(String rootValue, BinaryTree left, BinaryTree right){ root
-   * = new Node(rootValue, left, right); }
-   */
+
+  public BinaryTree(String rootValue, BinaryTree left, BinaryTree right) {
+    root = new Node(rootValue, left, right);
+  }
 
   public void insert(String aData) {
+    if (root == null) {
+      root = new Node(aData);
+    }
+    if (aData.compareTo(root.getData()) < 0) {
+      if (root.left() == null) {
+        root.setLeft(new BinaryTree(aData));
+      } else {
+        root.left().insert(aData);
+      }
+    }
+    if (aData.compareTo(root.getData()) > 0) {
+      if (root.right() == null) {
+        root.setRight(new BinaryTree(aData));
+      } else {
+        root.right().insert(aData);
 
+      }
+    }
   }
 
   public BinaryTree find(String aData) {
-
     return null;
   }
 
