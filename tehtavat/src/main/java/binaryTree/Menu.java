@@ -20,7 +20,12 @@ public class Menu {
         case '2':
           System.out.println("Anna etsittävä avain");
           data = Read.line();
-          // tree.find(data) = null tai ei null
+          BinaryTree found = tree.find(data);
+          if (found != null)
+            System.out.println("Avain löytyi: " + found.getRoot().getData());
+          else {
+            System.out.println("Ei löytynyt mitään avaimella: " + data);
+          }
           break;
         case '3':
           System.out.println("Puu esijärjestyksessä");

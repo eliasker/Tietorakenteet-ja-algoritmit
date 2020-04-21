@@ -37,6 +37,16 @@ public class BinaryTree {
   }
 
   public BinaryTree find(String aData) {
+    if (root == null)
+      return null;
+    if (aData.compareTo(root.getData()) == 0)
+      return this;
+    if (aData.compareTo(root.getData()) < 0 && root.left() != null) {
+      return root.left().find(aData);
+    }
+    if (aData.compareTo(root.getData()) > 0 && root.right() != null) {
+      return root.right().find(aData);
+    }
     return null;
   }
 
@@ -49,6 +59,10 @@ public class BinaryTree {
         root.right().preOrder();
     }
 
+  }
+
+  public Node getRoot() {
+    return root;
   }
 
   public void setLeft(BinaryTree tree) {
