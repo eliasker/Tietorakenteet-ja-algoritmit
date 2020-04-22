@@ -37,18 +37,15 @@ public class Stack {
     return takeAway;
   }
 
-  // palautetaan pinottujen alkioiden lukumäärä
   public int getSize() {
     return size;
   }
 
-  // listataan sisältö
   public void printItems() {
     ListItem lPointer = top;
     while (lPointer != null) {
       System.out.print(lPointer.getData() + ", ");
       lPointer = lPointer.getLink();
     }
-
   }
 }

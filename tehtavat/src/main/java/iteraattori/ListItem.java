@@ -12,6 +12,11 @@ public class ListItem {
     next = null;
   }
 
+  public ListItem(String data) {
+    this.data = data;
+    next = null;
+  }
+
   public String getData() {
     return data;
   }

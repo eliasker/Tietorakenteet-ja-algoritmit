@@ -1,5 +1,6 @@
 package iteraattori;
 
+import java.util.*;
 import util.Read;
 
 public class Main {
@@ -9,7 +10,8 @@ public class Main {
 
   private static void printMenu() {
     char select;
-    Stack s = new Stack();
+    // Stack s = new Stack();
+    LinkedList<ListItem> s = new LinkedList<>();
     String data;
     do {
       System.out.println("\n\t\t\t1. Alkion lisääminen.");
@@ -24,7 +26,7 @@ public class Main {
         case '1':
           System.out.println("Anna alkion sisältö (merkkijono)");
           data = new String(Read.line());
-          s.push(data);
+          s.push(new ListItem(data));
           break;
         case '2':
           ListItem item = s.pop();
@@ -34,15 +36,20 @@ public class Main {
             System.out.println("Poistettu alkio: " + item.getData());
           break;
         case '3':
-          s.printItems();
+          for (ListItem i : s) {
+            System.out.println(i.getData());
+          }
           break;
         case '4':
-          System.out.println("Lukumäärä = " + s.getSize());
+          System.out.println("Lukumäärä = " + s.size());
           break;
         case '5':
-          StackIterator itr = s.iterator();
-          while (itr.hasNext())
-            System.out.println(itr.next().getData());
+          System.out.println("Iteroidaan");
+          ListIterator<ListItem> listIter = s.listIterator();
+          while (listIter.hasNext()) {
+            String temp = listIter.next().getData();
+            System.out.println(temp);
+          }
           break;
         case '6':
           break;
