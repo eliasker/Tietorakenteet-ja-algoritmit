@@ -17,22 +17,18 @@ public class BinaryTree {
 
   public void insert(String aData) {
     if (root == null) {
+      System.out.println("Current root is null, setting value here: " + aData);
       root = new Node(aData);
-    }
-    if (aData.compareTo(root.getData()) < 0) {
-      if (root.left() == null) {
-        root.setLeft(new BinaryTree(aData));
-      } else {
-        root.left().insert(aData);
-      }
-    }
-    if (aData.compareTo(root.getData()) > 0) {
-      if (root.right() == null) {
-        root.setRight(new BinaryTree(aData));
-      } else {
-        root.right().insert(aData);
-
-      }
+    } else if (aData.compareTo(getRoot().getData()) < 0) {
+      System.out.println("Going left");
+      if (root.left() == null)
+        root.setLeft(new BinaryTree());
+      root.left().insert(aData);
+    } else {
+      System.out.println("Going right");
+      if (root.right() == null)
+        root.setRight(new BinaryTree());
+      root.right().insert(aData);
     }
   }
 
@@ -50,6 +46,23 @@ public class BinaryTree {
     return null;
   }
 
+  public void deleteNode(String aData) {
+    BinaryTree found = find(aData);
+    if (found != null) {
+      if (found.root.left() == null && found.root.right() == null) {
+        System.out.println("Löydetyllä ei lapsisolmuja, voidaan poistaa");
+      } else if (found.root.left() != null && found.root.right() != null) {
+        System.out.println("Löydetyllä kaksi lapsisolmua");
+      } else if (found.root.left() != null && found.root.right() == null) {
+        System.out.println("Löydetyllä yksi lapsisolmu, vasemmalla");
+      } else if (found.root.left() == null && found.root.right() != null) {
+        System.out.println("Löydetyllä yksi lapsi, oikealla puolella");
+      }
+    } else {
+      System.out.println("Avainta ei löytynyt puusta");
+    }
+  }
+
   public void preOrder() {
     if (root != null) {
       System.out.println(root.getData() + ',');
@@ -58,7 +71,6 @@ public class BinaryTree {
       if (root.right() != null) // pääseekö oikealle?
         root.right().preOrder();
     }
-
   }
 
   public Node getRoot() {

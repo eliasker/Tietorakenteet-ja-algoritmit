@@ -8,7 +8,7 @@ public class Menu {
     BinaryTree tree = new BinaryTree();
     String data;
     do {
-      System.out.println("1) Lisää avain\t2) Etsi avaimella\t3) Käy puu läpi esijärjestyksesssä\t4) Lopeta\n");
+      System.out.println("1) Lisää avain\t2) Etsi avaimella\t3) Käy puu läpi esijärjestyksesssä\t4) Poista avain\t5) Lopeta\n");
       select = Read.character();
 
       switch (select) {
@@ -31,8 +31,12 @@ public class Menu {
           System.out.println("Puu esijärjestyksessä");
           tree.preOrder();
           break;
+        case '4':
+          System.out.println("Syötä poistettava:");
+          data = Read.line();
+          tree.deleteNode(data);
       }
       System.out.println();
-    } while (select != '4');
+    } while (select != '5');
   }
 }
