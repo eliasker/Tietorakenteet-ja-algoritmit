@@ -17,15 +17,15 @@ public class BinaryTree {
 
   public void insert(String aData) {
     if (root == null) {
-      System.out.println("Current root is null, setting value here: " + aData);
+      System.out.println("Juuri on null, asetetaan " + aData);
       root = new Node(aData);
     } else if (aData.compareTo(getRoot().getData()) < 0) {
-      System.out.println("Going left");
+      System.out.println("Vasemmalle");
       if (root.left() == null)
         root.setLeft(new BinaryTree());
       root.left().insert(aData);
     } else {
-      System.out.println("Going right");
+      System.out.println("Oikealle");
       if (root.right() == null)
         root.setRight(new BinaryTree());
       root.right().insert(aData);
@@ -47,19 +47,35 @@ public class BinaryTree {
   }
 
   public void deleteNode(String aData) {
-    BinaryTree found = find(aData);
-    if (found != null) {
-      if (found.root.left() == null && found.root.right() == null) {
-        System.out.println("Löydetyllä ei lapsisolmuja, voidaan poistaa");
-      } else if (found.root.left() != null && found.root.right() != null) {
-        System.out.println("Löydetyllä kaksi lapsisolmua");
-      } else if (found.root.left() != null && found.root.right() == null) {
-        System.out.println("Löydetyllä yksi lapsisolmu, vasemmalla");
-      } else if (found.root.left() == null && found.root.right() != null) {
-        System.out.println("Löydetyllä yksi lapsi, oikealla puolella");
+    if (aData.compareTo(root.getData()) == 0) {
+      System.out.println(aData + " löytyi");
+      if (root.left() == null && root.right() == null) {
+        System.out.println("Ei lapsia, poistetaan " + aData);
+        root = null;
+      } else if (root.left() != null && root.right() != null) {
+        // TODO
+        // kaksi lapsipuuta
+        // mene oikealle, etsi pienin
+        // temp = pienin, poista pienin (rekursio)
+        // tee funktio (find, temp)
+      } else if (root.left() != null || root.right() != null) {
+        System.out.println(aData + " yksi lapsi, korvataan...");
+        if (root.left() != null) {
+          System.out.println("...vasemmanpuoleisella lapsipuulla");
+          root = root.left().getRoot();
+        } else {
+          System.out.println("...oikeanpuoleisella lapsipuulla");
+          root = root.right().getRoot();
+        }
       }
-    } else {
-      System.out.println("Avainta ei löytynyt puusta");
+    } else if (aData.compareTo(root.getData()) < 0) {
+      System.out.println("Rekursio vasemmalle");
+      if (root.left() != null)
+        root.left().deleteNode(aData);
+    } else if (aData.compareTo(root.getData()) > 0) {
+      System.out.println("Rekursio oikealle");
+      if (root.right() != null)
+        root.right().deleteNode(aData);
     }
   }
 
