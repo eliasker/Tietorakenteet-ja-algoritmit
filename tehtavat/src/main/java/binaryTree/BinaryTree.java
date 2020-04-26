@@ -92,6 +92,29 @@ public class BinaryTree {
     }
   }
 
+  public void getHeight(String aData) {
+    BinaryTree found = find(aData);
+    int left = 0, right = 0;
+    if (found == null) System.out.println("Ei tuloksia avaimella " + aData);
+    else {
+      if (found.getRoot().left() != null) left = found.getHeightRecursion(left);
+      if (found.getRoot().right() != null) right = found.getHeightRecursion(right);
+      String heightStr = "Puun korkeus alkaen arvosta " + aData + " on: ";
+      System.out.println(heightStr + (left >= right ? left : right));
+    }
+  }
+
+  public int getHeightRecursion(int height) {
+    int left = height, right = height;
+    if (root.left() != null)
+      left = root.left().getHeightRecursion(left + 1);
+    if (root.right() != null)
+      right = root.right().getHeightRecursion(right + 1);
+    if (left >= right)
+      return left;
+    return right;
+  }
+
   public Node getRoot() {
     return root;
   }
