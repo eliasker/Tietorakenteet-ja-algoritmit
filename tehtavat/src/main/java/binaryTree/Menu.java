@@ -34,8 +34,7 @@ public class Menu {
         case '4':
           System.out.println("Syötä poistettava:");
           data = Read.line();
-          if (tree.find(data) == null) System.out.println("Puu ei sisällä avainta " + data);
-          else tree.deleteNode(data);
+          tree.deleteNode(data);
       }
       System.out.println();
     } while (select != '5');

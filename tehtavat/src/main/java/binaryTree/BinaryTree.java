@@ -46,36 +46,39 @@ public class BinaryTree {
     return null;
   }
 
+  public BinaryTree findSmallest() {
+    if (root.left() != null) {
+      return root.left().findSmallest();
+    }
+    return this;
+  }
+
   public void deleteNode(String aData) {
-    if (aData.compareTo(root.getData()) == 0) {
-      System.out.println(aData + " löytyi");
-      if (root.left() == null && root.right() == null) {
+    BinaryTree found = find(aData);
+    if (found == null)
+      System.out.println("Ei löytynyt avaimella " + aData);
+    else {
+      if (found.root.left() == null && found.root.right() == null) {
         System.out.println("Ei lapsia, poistetaan " + aData);
-        root = null;
-      } else if (root.left() != null && root.right() != null) {
-        // TODO
-        // kaksi lapsipuuta
-        // mene oikealle, etsi pienin
-        // temp = pienin, poista pienin (rekursio)
-        // tee funktio (find, temp)
-      } else if (root.left() != null || root.right() != null) {
-        System.out.println(aData + " yksi lapsi, korvataan...");
-        if (root.left() != null) {
-          System.out.println("...vasemmanpuoleisella lapsipuulla");
-          root = root.left().getRoot();
+        found.root = null;
+      } else if (found.root.left() != null && found.root.right() != null) {
+        System.out.println(aData + ":lla on kaksi lapsipuuta");
+        BinaryTree smallest = found.root.right().findSmallest();
+        String temp = smallest.getRoot().getData();
+        System.out.println("Pienin arvo oikealla: " + temp);
+        found.deleteNode(temp);
+        found.root.setData(temp);
+      } else {
+        System.out.println(aData + ":lla on yksi lapsipuu...");
+        if (found.root.left() != null) {
+          System.out.println("...vasemmalla");
+          found.root = found.root.left().getRoot();
         } else {
-          System.out.println("...oikeanpuoleisella lapsipuulla");
-          root = root.right().getRoot();
+          System.out.println("...oikealla");
+          found.root = found.root.right().getRoot();
+
         }
       }
-    } else if (aData.compareTo(root.getData()) < 0) {
-      System.out.println("Rekursio vasemmalle");
-      if (root.left() != null)
-        root.left().deleteNode(aData);
-    } else if (aData.compareTo(root.getData()) > 0) {
-      System.out.println("Rekursio oikealle");
-      if (root.right() != null)
-        root.right().deleteNode(aData);
     }
   }
 
