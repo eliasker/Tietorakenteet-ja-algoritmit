@@ -15,12 +15,12 @@ public class Main {
   }
 
   static void test(SortedList sList) {
-    System.out.println("\nTestit:");
-    System.out.println("Haku avaimella aData: " + sList.find("aData"));
-    System.out.println("Haku avaimella kolmas: " + sList.find("eka"));
-    System.out.println("Minimi: " + sList.getMin());
-    System.out.println("Maksimi: " + sList.getMax());
-    System.out.println("Listan sisältö:");
-    for (String str : sList.getSortedList()) System.out.println(str);
+    System.out.println("\nTesti:");
+    System.out.println("1) Haku avaimella aData: " + sList.find("aData"));
+    System.out.println("2) Haku avaimella kolmas: " + sList.find("eka"));
+    System.out.println("3) Minimi: " + sList.getMin());
+    System.out.println("4) Maksimi: " + sList.getMax());
+    System.out.println("5) Listan sisältö:");
+    sList.printList();  
   }
 }

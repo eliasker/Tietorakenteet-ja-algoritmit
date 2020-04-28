@@ -59,28 +59,27 @@ public class SortedList {
     return middleKey;
   }
 
+  /**
+   * Tyhjä lista palauttaa nullin, muuten listan ensimmäinen eli minimi
+   * @return null tai listan minimiarvo
+   */
   public String getMin() {
     return list.size() == 0 ? null: list.get(0);
   }
 
+  /**
+   * Tyhjä lista palauttaa nullin, muuten listan viimeinen eli maksimi
+   * @return null tai listan maksimiarvo
+   */
   public String getMax() {
     return list.size() == 0 ? null : list.get(list.size() - 1);
   }
 
   /**
-   * Apumetodeja
-   * @return
-   */
-  public ArrayList<String> getSortedList() {
-    return list;
-  }
-
-  public void printList(List<String> array) {
-    try {
-      System.out.println("Listan avaimet");
-      for (String str : array)
-        System.out.println(str);
-    } catch (Exception e) {
-    }
+   * Tulostaa listan
+  */
+  public void printList() {
+    if (list.size() == 0) System.out.println("Tyhjä lista");
+    else for (String str : list) System.out.println(str);
   }
 }
