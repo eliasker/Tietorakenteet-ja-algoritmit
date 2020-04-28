@@ -8,7 +8,12 @@ public class Main {
     sList.insert("toka");
     sList.insert("kolmas");
     sList.insert("neljäs");
+    sList.insert("viides");
+    sList.insert("kuudes");
+    sList.insert("seitsemäs");
+    sList.insert("seitsemäs"); // duplikaatti avainten lisäys ei onnistu
 
-    for (String str : sList.getSortedList()) System.out.println(str);
+    System.out.println("Etsitään avaimella aData, tulos: " + sList.find("aData"));
+    System.out.println("Etsitään avaimella kolmas, tulos: " + sList.find("eka"));
   }
 }
