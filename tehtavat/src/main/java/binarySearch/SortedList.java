@@ -18,7 +18,7 @@ public class SortedList {
    * @param key Lisättävä avain
    */
   public void insert(String key) {
-    System.out.println("\nLisättävä avain: " + key);
+    System.out.println("\nLisätään avain: " + key);
     if (find(key) == null) {
       list.add(key);
       Collections.sort(list);
@@ -59,8 +59,16 @@ public class SortedList {
     return middleKey;
   }
 
+  public String getMin() {
+    return list.size() == 0 ? null: list.get(0);
+  }
+
+  public String getMax() {
+    return list.size() == 0 ? null : list.get(list.size() - 1);
+  }
+
   /**
-   * Apu metodeja
+   * Apumetodeja
    * @return
    */
   public ArrayList<String> getSortedList() {

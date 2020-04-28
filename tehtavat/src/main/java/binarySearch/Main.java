@@ -4,16 +4,23 @@ public class Main {
   public static void main(String[] args) {
     SortedList sList = new SortedList();
 
+    test(sList);
     sList.insert("eka");
     sList.insert("toka");
     sList.insert("kolmas");
-    sList.insert("neljäs");
-    sList.insert("viides");
-    sList.insert("kuudes");
-    sList.insert("seitsemäs");
-    sList.insert("seitsemäs"); // duplikaatti avainten lisäys ei onnistu
+    test(sList);
 
-    System.out.println("Etsitään avaimella aData, tulos: " + sList.find("aData"));
-    System.out.println("Etsitään avaimella kolmas, tulos: " + sList.find("eka"));
+    sList.insert("aData");
+    test(sList);
+  }
+
+  static void test(SortedList sList) {
+    System.out.println("\nTestit:");
+    System.out.println("Haku avaimella aData: " + sList.find("aData"));
+    System.out.println("Haku avaimella kolmas: " + sList.find("eka"));
+    System.out.println("Minimi: " + sList.getMin());
+    System.out.println("Maksimi: " + sList.getMax());
+    System.out.println("Listan sisältö:");
+    for (String str : sList.getSortedList()) System.out.println(str);
   }
 }
