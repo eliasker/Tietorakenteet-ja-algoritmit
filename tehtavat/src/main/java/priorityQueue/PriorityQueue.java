@@ -40,15 +40,17 @@ public class PriorityQueue {
   }
 
   public void printPriorityQueue() {
-    System.out.println();
+
     if (min == null)
       System.out.println("Priority queue is empty");
     else {
       Item current = min;
+      String listed = "\nPriority queue min -> max: ";
       while (current != null) {
-        System.out.println(current.getName());
+        listed += current.getName() + ", ";
         current = current.getNext();
       }
+      System.out.println(listed);
     }
   }
 }

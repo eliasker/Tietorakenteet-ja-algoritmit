@@ -14,15 +14,19 @@ public class Main {
 
       switch (input) {
         case '1':
+          System.out.print("Item name: ");
           name = Read.line();
+          System.out.print("Item priority: ");
           priority = Read.readInteger();
           pq.insert(new Item(name, priority));
+          pq.printPriorityQueue();
           break;
         case '2':
           pq.printPriorityQueue();
           break;
         case '3':
           pq.deleteMin();
+          pq.printPriorityQueue();
           break;
       }
       System.out.println();
