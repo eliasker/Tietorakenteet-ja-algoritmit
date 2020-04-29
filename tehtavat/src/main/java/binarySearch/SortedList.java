@@ -11,6 +11,12 @@ public class SortedList {
     list = new ArrayList<>();
   }
 
+
+  public SortedList(ArrayList<String> initialList) {
+    list = initialList;
+    Collections.sort(list);
+  }
+
   /**
    * Avain lisätään listalle, jos sitä ei esiinny listalla
    * eli find(key) == null
